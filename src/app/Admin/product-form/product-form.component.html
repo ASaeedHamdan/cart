@@ -1,0 +1,88 @@
+<div class="row">
+
+  <div class="col-md-6">
+    <form #f = ngForm (ngSubmit)="save(f.value)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+           type="text"
+           required minlength="3"
+           #title="ngModel"
+           [(ngModel)] ="proudct.title"
+           name="title"
+           id="title"
+           class="form-control">
+
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          <div *ngIf="title.errors.required">please Enter Product Title</div>
+          <div *ngIf="title.errors.minlength">please Enter with more than or equal  3 records</div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+            <label for="price">price</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text">$</span>
+              <input type="text"
+              class="form-control"
+              required
+              [min]="1"
+              #price="ngModel"
+              [(ngModel)] ="proudct.price"
+               name="price"
+              id="price"
+              aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">.00</span>
+            </div>
+            <div class="alert alert-danger" *ngIf="price.touched &&  price.invalid">
+              <div *ngIf="price.errors.required">please Enter Product price</div>
+              <div *ngIf="price.errors.min">sorry price mus'nt have zero or negative value and characters  </div>
+
+            </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Category">Category</label>
+        <select id="Category" [(ngModel)] ="proudct.Category" name="Category" required #Category="ngModel"  class="form-control">
+          <option value="">please choose Categories</option>
+          <option *ngFor="let cat of catetegories$ |async" [value]="cat.name"> {{cat.name}}</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="Category.touched && Category.invalid">
+          <div *ngIf="Category.errors.required">please Enter Product categoty</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imgurl">Image Url</label>
+        <input type="text"
+               required
+               url
+               [(ngModel)] ="proudct.imgurl"
+               name="imgurl"
+               #imgurl="ngModel"
+               id="imgurl"
+               class="form-control">
+
+        <div class="alert alert-danger" *ngIf="imgurl.touched && imgurl.invalid">
+          <div *ngIf="imgurl.errors.required">please Enter Product Image URL</div>
+          <div *ngIf="imgurl.errors.url">please Enter Correct Url URL</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary">{{actionbtn}}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card" *ngIf="title.value" style="width: 18rem;">
+        <img class="card-img-top" [src]="imgurl.value">
+        <div class="card-body">
+          <h5 class="card-title"> {{title.value}}</h5>
+          <h5 class="card-title"> {{Category.value}}</h5>
+          <p class="card-text">{{price.value | currency:"USD":true}}</p>
+        </div>
+    </div>
+  </div>
+</div>

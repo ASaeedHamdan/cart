@@ -1,0 +1,31 @@
+<p>
+    <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+</p>
+<p>
+    <input type="text" placeholder="Search Here.." class="form-control" #query (keyup)="filter(query.value)">
+</p>
+<table class="table row-border hover " datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Image</th>
+            <th scope="col">Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of fillteredProduct">
+            <td>{{product.payload.val().title}}</td>
+            <td>{{product.payload.val().price}}</td>
+            <td>{{product.payload.val().Category}}</td>
+            <td><img class="img" src="{{product.payload.val().imgurl}}"></td>
+            <!-- <td>{{product.payload.val().imgurl}}</td> -->
+            <td>
+                <a class=" btn btn-info" [routerLink]="['/admin/products',product.key]">Edit</a>&nbsp;
+                <button class=" btn btn-danger" (click)="delete(product.key)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

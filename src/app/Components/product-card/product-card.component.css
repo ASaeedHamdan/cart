@@ -1,0 +1,32 @@
+.card {
+    margin-bottom: 10px;
+    width: 250px;
+    /* style="width: 18rem; */
+}
+
+.card-title {
+    font-size: 20px;
+}
+
+.card-img-top {
+    height: 150px;
+}
+
+.card-footer {
+    padding: 0;
+}
+
+.asd {
+    width: 40px;
+    border-radius: 0;
+}
+
+.right {
+    margin-right: 4px;
+}
+
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
